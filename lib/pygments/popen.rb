@@ -3,6 +3,7 @@
 
 require 'open3'
 require 'multi_json'
+require 'json'
 require 'timeout'
 require 'logger'
 require 'time'
@@ -426,6 +427,7 @@ module Pygments
     # want them, text otherwise.
     def return_result(res, method)
       unless method == :lexer_name_for || method == :highlight || method == :css
+	print ("Hola. res is #{res}\n")
         res = MultiJson.load(res, :symbolize_keys => true)
       end
       res = res.rstrip if res.class == String

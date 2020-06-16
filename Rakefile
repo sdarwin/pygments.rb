@@ -1,22 +1,29 @@
 #!/usr/bin/env rake
 require "bundler/gem_tasks"
 
+print("rakefile line 4\n")
+
 task :default => :test
 
 # ==========================================================
 # Packaging
 # ==========================================================
 
+print("rakefile line 12\n")
 GEMSPEC = eval(File.read('pygments.rb.gemspec'))
 
+print("rakefile line 15\n")
 require 'rubygems/package_task'
 
 # ==========================================================
 # Testing
 # ==========================================================
 
+print("rakefile line 22\n")
 require 'rake/testtask'
+print("rakefile line 24\n")
 Rake::TestTask.new 'test' do |t|
+  print("rakefile line 26\n")
   t.test_files = FileList['test/test_*.rb']
 end
 
@@ -34,7 +41,7 @@ end
 
 # Write all the lexers to a file for easy lookup
 task :lexers do
-  sh "ruby cache-lexers.rb"
+  sh "set PYTHONIOENCODING=UTF-8 && ruby --trace cache-lexers.rb"
 end
 
 task(:test).enhance([:lexers])
